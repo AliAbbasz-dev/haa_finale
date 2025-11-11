@@ -21,7 +21,7 @@ import { useCreateServiceProvider } from "@/hooks/use-service-providers";
 import { useSupabase } from "@/components/providers/supabase-provider";
 import { X } from "lucide-react";
 
-import { SERVICE_PROVIDER_TOP_LEVEL_CATEGORIES, SERVICE_PROVIDER_CATEGORY_MAP } from "@/lib/constants";
+import { HOME_SERVICE_PROVIDER_TOP_LEVEL, AUTO_SERVICE_PROVIDER_TOP_LEVEL, OTHER_SERVICE_PROVIDER_TOP_LEVEL, SERVICE_PROVIDER_CATEGORY_MAP } from "@/lib/constants";
 
 const serviceProviderSchema = z.object({
   name: z.string().min(1, "Company name is required"),
@@ -46,6 +46,7 @@ export function CreateServiceProviderDialog({
   const [imageUrl, setImageUrl] = useState("");
   const [rating, setRating] = useState(5); // keep rating for future (not mandatory)
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedDomain, setSelectedDomain] = useState<"Home" | "Auto" | "Other">("Home");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { user } = useSupabase();
   const createProviderMutation = useCreateServiceProvider();
@@ -143,6 +144,27 @@ export function CreateServiceProviderDialog({
                   {errors.name && <p className="text-sm text-red-600">{errors.name.message}</p>}
                 </div>
                 <div className="space-y-2">
+                  <Label className="text-sm font-medium text-gray-700">Service Domain</Label>
+                  <Select
+                    value={selectedDomain}
+                    onValueChange={(val: "Home" | "Auto" | "Other") => {
+                      setSelectedDomain(val);
+                      setSelectedCategory("");
+                      setValue("service_type", "");
+                      setValue("service_subtype", "");
+                    }}
+                  >
+                    <SelectTrigger className="w-full px-3 py-2 bg-white text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 [&>span[data-placeholder]]:text-blue-500">
+                      <SelectValue placeholder="Select domain" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white text-gray-900 border border-gray-300 rounded-md max-h-72 overflow-auto">
+                      <SelectItem value="Home" className="hover:bg-gray-100">Home</SelectItem>
+                      <SelectItem value="Auto" className="hover:bg-gray-100">Auto</SelectItem>
+                      <SelectItem value="Other" className="hover:bg-gray-100">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
                   <Label className="text-sm font-medium text-gray-700">Service Type *</Label>
                   {/* Hidden input to register with RHF */}
                   <input type="hidden" {...register("service_type")}/>
@@ -158,7 +180,13 @@ export function CreateServiceProviderDialog({
                       <SelectValue placeholder="Select service" />
                     </SelectTrigger>
                     <SelectContent className="bg-white text-gray-900 border border-gray-300 rounded-md max-h-72 overflow-auto">
-                      {SERVICE_PROVIDER_TOP_LEVEL_CATEGORIES.map(cat => (
+                      {(
+                        selectedDomain === "Home"
+                          ? HOME_SERVICE_PROVIDER_TOP_LEVEL
+                          : selectedDomain === "Auto"
+                          ? AUTO_SERVICE_PROVIDER_TOP_LEVEL
+                          : OTHER_SERVICE_PROVIDER_TOP_LEVEL
+                      ).map((cat: string) => (
                         <SelectItem key={cat} value={cat} className="hover:bg-gray-100">{cat}</SelectItem>
                       ))}
                     </SelectContent>

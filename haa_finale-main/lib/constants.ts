@@ -6,6 +6,33 @@ export const HOME_PRESETS = [
   { label: "4 Bedrooms / 3 Bathrooms", bedrooms: 4, bathrooms: 3 }
 ];
 
+// Other/Professional-only categories for Service Provider creation UI
+export const OTHER_SERVICE_PROVIDER_TOP_LEVEL: string[] = [
+  "Insurance Providers",
+  "Real Estate",
+  "Smart Home / Security",
+  "Moving / Storage",
+];
+
+// Auto-only categories for Service Provider creation UI
+export const AUTO_SERVICE_PROVIDER_TOP_LEVEL: string[] = [
+  "General Auto Repair",
+  "Oil Change / Lube Services",
+  "Tires",
+  "Brakes",
+  "Transmission",
+  "Engine Services",
+  "Electrical / Battery",
+  "Suspension / Steering",
+  "Exhaust / Muffler",
+  "AC / Heating",
+  "Detailing / Car Wash",
+  "Auto Glass",
+  "Body Shop / Collision",
+  "Car Electronics",
+  "Performance Upgrades",
+];
+
 export const ROOM_TYPES = [
   "Living Room",
   "Family Room / Den",
@@ -221,7 +248,7 @@ export const SERVICE_PROVIDER_CATEGORIES = {
       "Small Appliance Repair"
     ],
     Flooring: ["Carpet Install / Repair", "Hardwood / Laminate", "Tile / Stone", "Vinyl / LVP"],
-    Painting: ["Interior Painting", "Exterior Painting", "Staining"],
+    Painting: ["Interior Painting", "Exterior Painting", "Staining (Decks, Fences)"],
     Roofing: ["Roof Inspection", "Roof Repair", "Roof Replacement"],
     Landscaping: [
       "Lawn Mowing / Maintenance",
@@ -284,17 +311,14 @@ export const SERVICE_PROVIDER_CATEGORY_MAP: Record<string, string[]> = {
     "Panel Upgrades"
   ],
   HVAC: [
-    "Heating (Furnace / Boiler)",
-    "Cooling (AC / Mini-Split)",
+    "Heating (Furnace, Boiler)",
+    "Cooling (AC Units, Mini-Split)",
     "Duct Cleaning",
-    "Filter Replacement",
     "Thermostat / Smart Controls"
   ],
   "Appliance Repair": [
-    "Refrigerator",
-    "Washer / Dryer",
-    "Oven / Range",
-    "Dishwasher",
+    "Kitchen Appliances (Fridge, Oven, Dishwasher)",
+    "Laundry Appliances (Washer, Dryer)",
     "Small Appliance Repair"
   ],
   Flooring: [
@@ -330,14 +354,9 @@ export const SERVICE_PROVIDER_CATEGORY_MAP: Record<string, string[]> = {
   "Irrigation / Sprinklers": ["Installation", "Repair / Maintenance"],
   "Gutter Services": ["Cleaning", "Repair / Replacement"],
   "Pest Control": [
-    "Yard",
     "Termites",
-    "Ants",
     "Rodents",
-    "General Pest Control",
-    "Bed Bugs",
-    "Cockroaches",
-    "Mosquitoes"
+    "General Pest Control"
   ],
   "Remodeling / Renovation": [
     "Kitchen Remodel",
@@ -347,19 +366,13 @@ export const SERVICE_PROVIDER_CATEGORY_MAP: Record<string, string[]> = {
   ],
   "Deck / Patio": ["New Construction", "Repair / Refinishing"],
   "Fence Services": [
-    "Installation",
-    "Repair",
-    "Wood Installation",
-    "Vinyl Installation",
-    "Chain Link Installation",
-    "Maintenance"
+    "Installation (Wood, Vinyl, Chain Link)",
+    "Repair"
   ],
   "Cleaning Services": [
-    "Deep Clean",
-    "Carpet Cleaning",
-    "Upholstery Cleaning",
     "Residential Cleaning",
-    "Commercial Cleaning"
+    "Commercial Cleaning",
+    "Carpet / Upholstery Cleaning"
   ],
   "Exterior Painting / Siding Work": [
     "Exterior Painting",
@@ -442,6 +455,27 @@ export const SERVICE_PROVIDER_CATEGORY_MAP: Record<string, string[]> = {
 };
 
 export const SERVICE_PROVIDER_TOP_LEVEL_CATEGORIES = Object.keys(SERVICE_PROVIDER_CATEGORY_MAP);
+
+// Home-only categories for Service Provider creation UI
+export const HOME_SERVICE_PROVIDER_TOP_LEVEL: string[] = [
+  "Plumbing",
+  "Electrical",
+  "HVAC",
+  "Appliance Repair",
+  "Flooring",
+  "Painting",
+  "Roofing",
+  "Landscaping / Lawn Care",
+  "Tree Services",
+  "Irrigation / Sprinklers",
+  "Gutter Services",
+  "Pest Control",
+  "Remodeling / Renovation",
+  "Deck / Patio",
+  "Fence Services",
+  "Cleaning Services",
+  "Pools",
+];
 
 // Common vehicle makes and models (subset for dropdown). Additional models can be appended later or loaded dynamically.
 export const VEHICLE_MAKES = [

@@ -544,9 +544,11 @@ export default function LandingPage() {
                     <span className="text-gray-700">Mobile app access</span>
                   </li>
                 </ul>
-                <Button className="w-full bg-slate-800 hover:bg-slate-900 text-white rounded-full">
-                  Get Started Free
-                </Button>
+                <Link href="/login?plan=starter">
+                  <Button className="w-full bg-slate-800 hover:bg-slate-900 text-white rounded-full">
+                    Get Started Free
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -621,9 +623,11 @@ export default function LandingPage() {
                       </span>
                     </li>
                   </ul>
-                  <Button className="w-full bg-primary hover:bg-primary-600 text-black rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-200">
-                    Start Pro Trial
-                  </Button>
+                  <Link href="/login?plan=pro">
+                    <Button className="w-full bg-primary hover:bg-primary-600 text-black rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-200">
+                      Start Pro Trial
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </motion.div>
@@ -677,9 +681,11 @@ export default function LandingPage() {
                     <span className="text-gray-700">Analytics dashboard</span>
                   </li>
                 </ul>
-                <Button className="w-full bg-secondary hover:bg-secondary-800 text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-200">
-                  Claim Your Listing
-                </Button>
+                <Link href="/login?plan=provider">
+                  <Button className="w-full bg-secondary hover:bg-secondary-800 text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-all duration-200">
+                    Claim Your Listing
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

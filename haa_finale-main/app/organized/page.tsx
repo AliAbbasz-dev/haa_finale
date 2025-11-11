@@ -58,7 +58,7 @@ export default function OrganizedPage() {
                 </Button>
               </Link>
               <Link href="/login">
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6">
+                <Button className="bg-primary hover:bg-primary-600 text-black rounded-full px-6">
                   Join Us for Free
                 </Button>
               </Link>
