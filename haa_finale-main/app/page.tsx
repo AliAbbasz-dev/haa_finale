@@ -36,6 +36,12 @@ const heroImages = {
     "/carousels/homepage-6.png",
     "/carousels/homepage-7.png",
     "/carousels/homepage-8.png",
+    "/carousels/homepage-9.png",
+    "/carousels/homepage-10.png",
+    "/carousels/homepage-11.png",
+    "/carousels/homepage-12.png",
+    "/carousels/homepage-13.png",
+    "/carousels/homepage-14.png",
   ],
   home: [
     "/carousels/home-1.png",

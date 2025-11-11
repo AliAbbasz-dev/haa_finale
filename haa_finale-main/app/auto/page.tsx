@@ -77,6 +77,8 @@ const autoHeroImages: ReadonlyArray<string> = [
   "/carousels/vehicles-8.png",
   "/carousels/vehicles-9.png",
   "/carousels/vehicles-10.png",
+  "/carousels/vehicles-11.png",
+  "/carousels/vehicles-12.png",
 ];
 
 // Demo catalog
