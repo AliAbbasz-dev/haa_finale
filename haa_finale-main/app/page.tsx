@@ -24,34 +24,45 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// Categorized hero image sets. Drop image files into /public/carousels/ with the
-// names below (see README in the change summary after this edit).
+// Hero carousel images - Balanced 7 home + 7 auto = 14 total images
+// Images selected for optimal file size (<1MB preferred) and visual quality
 const heroImages = {
   all: [
-    "/carousels/homepage-1.png",
-    "/carousels/homepage-2.png",
-    "/carousels/homepage-3.png",
-    "/carousels/homepage-4.png",
-    "/carousels/homepage-5.png",
-    "/carousels/homepage-6.png",
-    "/carousels/homepage-7.png",
-    "/carousels/homepage-8.png",
-    "/carousels/homepage-9.png",
-    "/carousels/homepage-10.png",
-    "/carousels/homepage-11.png",
-    "/carousels/homepage-12.png",
-    "/carousels/homepage-13.png",
-    "/carousels/homepage-14.png",
+    // Home images (7 selected, optimized for file size 788KB-1.8MB)
+    "/carousels/homes-10.png",  // 788K - Modern living room
+    "/carousels/homes-6.png",   // 868K - Kitchen
+    "/carousels/homes-7.png",   // 819K - Bedroom
+    "/carousels/homes-9.png",   // 901K - Bathroom
+    "/carousels/homes-8.png",   // 1.2M - Dining area
+    "/carousels/homes-5.png",   // 1.7M - Exterior
+    "/carousels/homes-1.png",   // 1.8M - Home office
+
+    // Vehicle images (7 selected, optimized for file size 594KB-873KB)
+    "/carousels/vehicles-12.png", // 594K - Compact car
+    "/carousels/vehicles-8.png",  // 678K - Sedan
+    "/carousels/vehicles-6.png",  // 701K - SUV
+    "/carousels/vehicles-2.png",  // 744K - Sports car
+    "/carousels/vehicles-3.png",  // 774K - Pickup truck
+    "/carousels/vehicles-9.png",  // 836K - Luxury car
+    "/carousels/vehicles-11.png", // 873K - Electric vehicle
   ],
   home: [
-    "/carousels/home-1.png",
-    "/carousels/home-2.png",
-    "/carousels/home-3.png",
+    "/carousels/homes-10.png",
+    "/carousels/homes-6.png",
+    "/carousels/homes-7.png",
+    "/carousels/homes-9.png",
+    "/carousels/homes-8.png",
+    "/carousels/homes-5.png",
+    "/carousels/homes-1.png",
   ],
   auto: [
-    "/carousels/auto-1.png",
-    "/carousels/auto-2.png",
-    "/carousels/auto-3.png",
+    "/carousels/vehicles-12.png",
+    "/carousels/vehicles-8.png",
+    "/carousels/vehicles-6.png",
+    "/carousels/vehicles-2.png",
+    "/carousels/vehicles-3.png",
+    "/carousels/vehicles-9.png",
+    "/carousels/vehicles-11.png",
   ],
 };
 // Default landing page category (change to 'home' or 'auto' if desired)
@@ -174,34 +185,42 @@ export default function LandingPage() {
             <nav className="hidden md:flex items-center space-x-8">
               <Link
                 href="#home"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Home
               </Link>
               <Link
                 href="#features"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Features
               </Link>
               <Link
-                href="#pricing"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                href="/pricing"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Pricing
               </Link>
               <Link
                 href="#about"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 About Us
               </Link>
               <Link
                 href="#contact"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Contact
               </Link>
+              <a
+                href="https://shop-home-and-auto-assistant.myshopify.com/password"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-primary hover:text-primary-600 transition-colors"
+              >
+                Shop
+              </a>
             </nav>
 
             <div className="flex items-center space-x-4">
@@ -316,6 +335,119 @@ export default function LandingPage() {
               }`}
             />
           ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
+              Contact Us
+            </h2>
+            <p className="text-lg text-gray-600">We'd love to hear from you</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+            <div>
+              <h3 className="text-xl font-semibold text-slate-800 mb-3">Social</h3>
+              <ul className="space-y-2 text-primary">
+                <li>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61583506209910"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-primary-600 transition-colors"
+                  >
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com/homeandautollc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-primary-600 transition-colors"
+                  >
+                    Twitter / X
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/homeandautoassistant/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-primary-600 transition-colors"
+                  >
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.tiktok.com/@haa9580?_r=1&_t=ZT-91NqbiOIrhW"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-primary-600 transition-colors"
+                  >
+                    TikTok
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-slate-800 mb-3">Email</h3>
+              <ul className="space-y-2 text-primary">
+                <li>
+                  <a
+                    href="mailto:sales@homeandautoassistant.com"
+                    className="underline hover:text-primary-600 transition-colors"
+                  >
+                    sales@homeandautoassistant.com
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:support@homeandautoassistant.com"
+                    className="underline hover:text-primary-600 transition-colors"
+                  >
+                    support@homeandautoassistant.com
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:contact@homeandautoassistant.com"
+                    className="underline hover:text-primary-600 transition-colors"
+                  >
+                    contact@homeandautoassistant.com
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-10 max-w-4xl mx-auto">
+            <h3 className="text-xl font-semibold text-slate-800 mb-3">Quick Links</h3>
+            <ul className="space-y-2 text-primary">
+              <li>
+                <a
+                  href="http://wa.me/18135565358"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-primary-600 transition-colors"
+                >
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://share.google/IgVlmJNbNO6FAVD0I"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-primary-600 transition-colors"
+                >
+                  Google
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -852,7 +984,12 @@ export default function LandingPage() {
                 and auto assistant.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white">
+                <a
+                  href="https://twitter.com/homeandautollc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   <span className="sr-only">Twitter</span>
                   <svg
                     className="h-6 w-6"
@@ -862,7 +999,12 @@ export default function LandingPage() {
                     <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.854 8.252 8.252 0 01-6.113 2.13 11.626 11.626 0 006.652.458z" />
                   </svg>
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61583506209910"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   <span className="sr-only">Facebook</span>
                   <svg
                     className="h-6 w-6"
@@ -876,7 +1018,12 @@ export default function LandingPage() {
                     />
                   </svg>
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white">
+                <a
+                  href="https://www.instagram.com/homeandautoassistant/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   <span className="sr-only">Instagram</span>
                   <svg
                     className="h-6 w-6"
@@ -888,6 +1035,17 @@ export default function LandingPage() {
                       d="M12 2C7.691 2 4 5.691 4 10v4c0 4.309 3.691 8 8 8s8-3.691 8-8V10c0-4.309-3.691-8-8-8zm0 2c3.314 0 6 2.686 6 6v4c0 3.314-2.686 6-6 6s-6-2.686-6-6V10c0-3.314 2.686-6 6-6zm5.293 3.293a1 1 0 011.414 1.414l-1.414 1.414a1 1 0 01-1.414-1.414l1.414-1.414zm-8.586 0a1 1 0 011.414 0l1.414 1.414a1 1 0 01-1.414 1.414l-1.414-1.414a1 1 0 010-1.414zM12 14a2 2 0 100-4 2 2 0 000 4z"
                       clipRule="evenodd"
                     />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.tiktok.com/@haa9580?_r=1&_t=ZT-91NqbiOIrhW"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  <span className="sr-only">TikTok</span>
+                  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 3c1.333 1.6 3.067 2.6 5 2.8v3.2c-1.8-.06-3.467-.56-5-1.5V14c0 3.867-3.133 7-7 7S2 17.867 2 14s3.133-7 7-7c.34 0 .673.023 1 .068V10a4 4 0 00-1-.135c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V3h3z"/>
                   </svg>
                 </a>
               </div>
@@ -923,22 +1081,32 @@ export default function LandingPage() {
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#features" className="hover:text-white transition-colors">
                     Features
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <Link href="/pricing" className="hover:text-white transition-colors">
                     Pricing
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="https://shop-home-and-auto-assistant.myshopify.com/password"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors"
+                  >
+                    Shop
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Updates
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Security
                   </a>
                 </li>

@@ -5,6 +5,378 @@ import { createBrowserClient } from "@supabase/ssr";
 export type Database = {
   public: {
     Tables: {
+      accounts: {
+        Row: {
+          id: string;
+          user_id: string;
+          customer_segment: 'residential' | 'landlord' | 'commercial' | 'marketplace';
+          plan_id: string;
+          plan_tier: string;
+          billing_cycle: 'monthly' | 'annual';
+          trial_end_date: string | null;
+          subscription_status: 'trial' | 'active' | 'past_due' | 'canceled' | 'paused';
+          current_period_start: string;
+          current_period_end: string;
+          stripe_customer_id: string | null;
+          stripe_subscription_id: string | null;
+          add_ons: any;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          customer_segment: 'residential' | 'landlord' | 'commercial' | 'marketplace';
+          plan_id: string;
+          plan_tier: string;
+          billing_cycle: 'monthly' | 'annual';
+          trial_end_date?: string | null;
+          subscription_status?: 'trial' | 'active' | 'past_due' | 'canceled' | 'paused';
+          current_period_start?: string;
+          current_period_end: string;
+          stripe_customer_id?: string | null;
+          stripe_subscription_id?: string | null;
+          add_ons?: any;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          customer_segment?: 'residential' | 'landlord' | 'commercial' | 'marketplace';
+          plan_id?: string;
+          plan_tier?: string;
+          billing_cycle?: 'monthly' | 'annual';
+          trial_end_date?: string | null;
+          subscription_status?: 'trial' | 'active' | 'past_due' | 'canceled' | 'paused';
+          current_period_start?: string;
+          current_period_end?: string;
+          stripe_customer_id?: string | null;
+          stripe_subscription_id?: string | null;
+          add_ons?: any;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      seats: {
+        Row: {
+          id: string;
+          account_id: string;
+          user_id: string | null;
+          email: string | null;
+          role: 'owner' | 'admin' | 'member' | 'guest';
+          status: 'pending' | 'active' | 'revoked';
+          invited_at: string;
+          accepted_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          account_id: string;
+          user_id?: string | null;
+          email?: string | null;
+          role?: 'owner' | 'admin' | 'member' | 'guest';
+          status?: 'pending' | 'active' | 'revoked';
+          invited_at?: string;
+          accepted_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          account_id?: string;
+          user_id?: string | null;
+          email?: string | null;
+          role?: 'owner' | 'admin' | 'member' | 'guest';
+          status?: 'pending' | 'active' | 'revoked';
+          invited_at?: string;
+          accepted_at?: string | null;
+          created_at?: string;
+        };
+      };
+      property_tiers: {
+        Row: {
+          id: string;
+          home_id: string;
+          account_id: string;
+          tier: 'premium' | 'signature';
+          sqft: number | null;
+          bedrooms: number | null;
+          bathrooms: number | null;
+          is_active: boolean;
+          assigned_at: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          home_id: string;
+          account_id: string;
+          tier: 'premium' | 'signature';
+          sqft?: number | null;
+          bedrooms?: number | null;
+          bathrooms?: number | null;
+          is_active?: boolean;
+          assigned_at?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          home_id?: string;
+          account_id?: string;
+          tier?: 'premium' | 'signature';
+          sqft?: number | null;
+          bedrooms?: number | null;
+          bathrooms?: number | null;
+          is_active?: boolean;
+          assigned_at?: string;
+          created_at?: string;
+        };
+      };
+      units: {
+        Row: {
+          id: string;
+          account_id: string;
+          property_id: string | null;
+          unit_number: string | null;
+          address: string | null;
+          status: 'active' | 'vacant' | 'maintenance' | 'archived';
+          tenant_name: string | null;
+          tenant_email: string | null;
+          tenant_phone: string | null;
+          lease_start_date: string | null;
+          lease_end_date: string | null;
+          rent_amount: number | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          account_id: string;
+          property_id?: string | null;
+          unit_number?: string | null;
+          address?: string | null;
+          status?: 'active' | 'vacant' | 'maintenance' | 'archived';
+          tenant_name?: string | null;
+          tenant_email?: string | null;
+          tenant_phone?: string | null;
+          lease_start_date?: string | null;
+          lease_end_date?: string | null;
+          rent_amount?: number | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          account_id?: string;
+          property_id?: string | null;
+          unit_number?: string | null;
+          address?: string | null;
+          status?: 'active' | 'vacant' | 'maintenance' | 'archived';
+          tenant_name?: string | null;
+          tenant_email?: string | null;
+          tenant_phone?: string | null;
+          lease_start_date?: string | null;
+          lease_end_date?: string | null;
+          rent_amount?: number | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      sites: {
+        Row: {
+          id: string;
+          account_id: string;
+          name: string;
+          address: string | null;
+          site_type: string | null;
+          sqft: number | null;
+          status: 'active' | 'inactive' | 'archived';
+          manager_name: string | null;
+          manager_email: string | null;
+          manager_phone: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          account_id: string;
+          name: string;
+          address?: string | null;
+          site_type?: string | null;
+          sqft?: number | null;
+          status?: 'active' | 'inactive' | 'archived';
+          manager_name?: string | null;
+          manager_email?: string | null;
+          manager_phone?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          account_id?: string;
+          name?: string;
+          address?: string | null;
+          site_type?: string | null;
+          sqft?: number | null;
+          status?: 'active' | 'inactive' | 'archived';
+          manager_name?: string | null;
+          manager_email?: string | null;
+          manager_phone?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      leads: {
+        Row: {
+          id: string;
+          provider_user_id: string;
+          customer_user_id: string | null;
+          category: string;
+          subcategory: string | null;
+          complexity: 'low' | 'medium' | 'high';
+          price_paid: number;
+          zip_code: string;
+          description: string | null;
+          status: 'new' | 'accepted' | 'contacted' | 'quoted' | 'won' | 'lost' | 'spam';
+          credit_eligible: boolean;
+          credit_issued: boolean;
+          credit_amount: number | null;
+          created_at: string;
+          updated_at: string;
+          credited_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          provider_user_id: string;
+          customer_user_id?: string | null;
+          category: string;
+          subcategory?: string | null;
+          complexity: 'low' | 'medium' | 'high';
+          price_paid: number;
+          zip_code: string;
+          description?: string | null;
+          status?: 'new' | 'accepted' | 'contacted' | 'quoted' | 'won' | 'lost' | 'spam';
+          credit_eligible?: boolean;
+          credit_issued?: boolean;
+          credit_amount?: number | null;
+          created_at?: string;
+          updated_at?: string;
+          credited_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          provider_user_id?: string;
+          customer_user_id?: string | null;
+          category?: string;
+          subcategory?: string | null;
+          complexity?: 'low' | 'medium' | 'high';
+          price_paid?: number;
+          zip_code?: string;
+          description?: string | null;
+          status?: 'new' | 'accepted' | 'contacted' | 'quoted' | 'won' | 'lost' | 'spam';
+          credit_eligible?: boolean;
+          credit_issued?: boolean;
+          credit_amount?: number | null;
+          created_at?: string;
+          updated_at?: string;
+          credited_at?: string | null;
+        };
+      };
+      transactions: {
+        Row: {
+          id: string;
+          account_id: string | null;
+          user_id: string;
+          type: 'subscription' | 'lead_purchase' | 'add_on' | 'credit' | 'refund';
+          amount: number;
+          currency: string;
+          stripe_payment_id: string | null;
+          stripe_invoice_id: string | null;
+          description: string | null;
+          metadata: any;
+          status: 'pending' | 'succeeded' | 'failed' | 'refunded';
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          account_id?: string | null;
+          user_id: string;
+          type: 'subscription' | 'lead_purchase' | 'add_on' | 'credit' | 'refund';
+          amount: number;
+          currency?: string;
+          stripe_payment_id?: string | null;
+          stripe_invoice_id?: string | null;
+          description?: string | null;
+          metadata?: any;
+          status?: 'pending' | 'succeeded' | 'failed' | 'refunded';
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          account_id?: string | null;
+          user_id?: string;
+          type?: 'subscription' | 'lead_purchase' | 'add_on' | 'credit' | 'refund';
+          amount?: number;
+          currency?: string;
+          stripe_payment_id?: string | null;
+          stripe_invoice_id?: string | null;
+          description?: string | null;
+          metadata?: any;
+          status?: 'pending' | 'succeeded' | 'failed' | 'refunded';
+          created_at?: string;
+        };
+      };
+      usage_limits: {
+        Row: {
+          id: string;
+          account_id: string;
+          limit_type: string;
+          current_usage: number;
+          max_limit: number | null;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          account_id: string;
+          limit_type: string;
+          current_usage?: number;
+          max_limit?: number | null;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          account_id?: string;
+          limit_type?: string;
+          current_usage?: number;
+          max_limit?: number | null;
+          updated_at?: string;
+        };
+      };
+      haaven_conversations: {
+        Row: {
+          id: string;
+          user_id: string;
+          title: string;
+          messages: any; // Array of {role: 'user'|'assistant', content: string, timestamp: string}
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          title?: string;
+          messages?: any;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          title?: string;
+          messages?: any;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
       homes: {
         Row: {
           id: string;

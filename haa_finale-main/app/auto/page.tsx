@@ -298,6 +298,7 @@ function ProgressiveSearchBar({
   setMaxPrice: (v: number | undefined) => void;
 }) {
   const [openStep, setOpenStep] = useState<0 | 1 | 2 | 3 | 4>(0);
+  const [makeQuery, setMakeQuery] = useState("");
 
   const modelsForMake = useMemo(() => {
     if (!ps.make) return [] as string[];
@@ -341,6 +342,7 @@ function ProgressiveSearchBar({
     setTransmission("Any");
     setMaxPrice(undefined);
     setOpenStep(0);
+    setMakeQuery("");
   };
 
   return (
@@ -482,28 +484,40 @@ function ProgressiveSearchBar({
               </div>
             </div>
             {openStep === 1 && (
-              <motion.div
-                variants={listStagger}
-                initial="initial"
-                animate="animate"
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"
-              >
-                {MAKES.map((m) => (
-                  <motion.button
-                    key={m}
-                    variants={itemFade}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => pickMake(m)}
-                    className={`px-3 py-2 rounded-full border text-sm ${
-                      ps.make === m
-                        ? "bg-primary text-black border-primary font-semibold"
-                        : "bg-white border-gray-200 hover:bg-gray-50 text-gray-900"
-                    }`}
-                  >
-                    {m}
-                  </motion.button>
-                ))}
-              </motion.div>
+              <>
+                <div className="mb-3">
+                  <input
+                    value={makeQuery}
+                    onChange={(e) => setMakeQuery(e.target.value)}
+                    placeholder="Search makes"
+                    className="w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400"
+                  />
+                </div>
+                <motion.div
+                  variants={listStagger}
+                  initial="initial"
+                  animate="animate"
+                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 max-h-64 overflow-y-auto pr-1"
+                >
+                  {MAKES.filter((m) =>
+                    m.toLowerCase().includes(makeQuery.trim().toLowerCase())
+                  ).map((m) => (
+                    <motion.button
+                      key={m}
+                      variants={itemFade}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => pickMake(m)}
+                      className={`px-3 py-2 rounded-full border text-sm ${
+                        ps.make === m
+                          ? "bg-primary text-black border-primary font-semibold"
+                          : "bg-white border-gray-200 hover:bg-gray-50 text-gray-900"
+                      }`}
+                    >
+                      {m}
+                    </motion.button>
+                  ))}
+                </motion.div>
+              </>
             )}
 
             {openStep === 2 && (
@@ -719,22 +733,36 @@ export default function AutoPage() {
             <nav className="hidden md:flex items-center space-x-8">
               <Link
                 href="/"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Home
               </Link>
               <Link
                 href="/auto"
-                className="text-sm font-medium text-primary hover:text-primary-600"
+                className="text-sm font-medium text-primary hover:text-primary-600 transition-colors"
               >
                 Auto
               </Link>
               <Link
                 href="/organized"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Organized
               </Link>
+              <Link
+                href="/pricing"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Pricing
+              </Link>
+              <a
+                href="https://shop-home-and-auto-assistant.myshopify.com/password"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Shop
+              </a>
             </nav>
 
             <div className="flex items-center space-x-4">

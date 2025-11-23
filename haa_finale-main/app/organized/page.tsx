@@ -30,22 +30,36 @@ export default function OrganizedPage() {
             <nav className="hidden md:flex items-center space-x-8">
               <Link
                 href="/"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Home
               </Link>
               <Link
                 href="/auto"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Auto
               </Link>
               <Link
                 href="/organized"
-                className="text-sm font-medium text-primary hover:text-primary-600"
+                className="text-sm font-medium text-primary hover:text-primary-600 transition-colors"
               >
                 Organized
               </Link>
+              <Link
+                href="/pricing"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Pricing
+              </Link>
+              <a
+                href="https://shop-home-and-auto-assistant.myshopify.com/password"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Shop
+              </a>
             </nav>
 
             <div className="flex items-center space-x-4">

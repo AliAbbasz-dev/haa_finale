@@ -35,9 +35,12 @@ export function CreateHomeDialog({
   onOpenChange,
 }: CreateHomeDialogProps) {
   const [imageUrl, setImageUrl] = useState("");
-  const [preset, setPreset] = useState<string>("");
+  const [preset, setPreset] = useState<string>("3 Bedrooms / 2 Bathrooms");
   const [extraRoom, setExtraRoom] = useState<string>("");
   const [extraRooms, setExtraRooms] = useState<string[]>([]);
+  const [bedrooms, setBedrooms] = useState<number>(3);
+  const [fullBaths, setFullBaths] = useState<number>(2);
+  const [halfBaths, setHalfBaths] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { user } = useSupabase();
   const createHomeMutation = useCreateHome();
@@ -62,18 +65,14 @@ export function CreateHomeDialog({
         user_id: user.id,
       });
       const rooms: string[] = [];
-      const sel = HOME_PRESETS.find((p) => p.label === preset);
-      if (sel) {
-        rooms.push("Kitchen");
-        rooms.push("Living Room");
-        const bdr = Math.floor(sel.bedrooms || 0);
-        const bath = sel.bathrooms || 0;
-        for (let i = 1; i <= bdr; i++) rooms.push(`Bedroom ${i}`);
-        const full = Math.floor(bath);
-        const half = bath % 1 >= 0.5 ? 1 : 0;
-        for (let i = 1; i <= full; i++) rooms.push(`Full Bathroom ${i}`);
-        if (half) rooms.push("Half Bathroom");
-      }
+      rooms.push("Kitchen");
+      rooms.push("Living Room");
+      const bdr = Math.max(0, Math.floor(bedrooms));
+      const full = Math.max(0, Math.floor(fullBaths));
+      const half = Math.max(0, Math.floor(halfBaths));
+      for (let i = 1; i <= bdr; i++) rooms.push(`Bedroom ${i}`);
+      for (let i = 1; i <= full; i++) rooms.push(`Full Bathroom ${i}`);
+      for (let i = 1; i <= half; i++) rooms.push(`Half Bathroom${half > 1 ? ` ${i}` : ""}`);
       extraRooms.forEach((r) => rooms.push(r));
       if (rooms.length && (home as any)?.id) {
         // Batch insert rooms to avoid multiple per-room toasts
@@ -97,9 +96,12 @@ export function CreateHomeDialog({
       }
       reset();
       setImageUrl("");
-      setPreset("");
+      setPreset("3 Bedrooms / 2 Bathrooms");
       setExtraRoom("");
       setExtraRooms([]);
+      setBedrooms(3);
+      setFullBaths(2);
+      setHalfBaths(0);
       onOpenChange(false);
     } catch (err) {
       console.error(err);
@@ -176,26 +178,70 @@ export function CreateHomeDialog({
                 </Label>
                 <select
                   value={preset}
-                  onChange={(e) => setPreset(e.target.value)}
-                  className="mt-1 w-full px-3 py-2 bg-white text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm cursor-pointer hover:border-transparent transition-colors"
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setPreset(val);
+                    const match = HOME_PRESETS.find((p) => p.label === val);
+                    if (match) {
+                      setBedrooms(Math.floor(match.bedrooms || 0));
+                      const bath = match.bathrooms || 0;
+                      setFullBaths(Math.floor(bath));
+                      setHalfBaths(bath % 1 >= 0.5 ? 1 : 0);
+                    } else {
+                      // Clear when "Custom" is selected
+                      setBedrooms(0);
+                      setFullBaths(0);
+                      setHalfBaths(0);
+                    }
+                  }}
+                  className="mt-1 w-full px-3 py-2 bg-white text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm cursor-pointer hover:border-blue-400 transition-colors"
                   style={{ WebkitAppearance: "none" }}
                 >
-                  <option value="">Select preset (auto rooms)</option>
+                  <option value="">Custom (manual setup)</option>
                   {HOME_PRESETS.map((p) => (
                     <option key={p.label} value={p.label}>
                       {p.label}
                     </option>
                   ))}
                 </select>
+                <p className="text-xs text-gray-500 mt-1">
+                  Default: 3 Bedrooms / 2 Bathrooms. Adjust with +/- buttons below.
+                </p>
+                <div className="mt-3 grid grid-cols-3 gap-3">
+                  <div>
+                    <div className="text-[11px] text-gray-600">Bedrooms</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Button type="button" variant="outline" className="px-2" onClick={() => setBedrooms((v) => Math.max(0, v - 1))}>-</Button>
+                      <div className="w-10 text-center">{bedrooms}</div>
+                      <Button type="button" variant="outline" className="px-2" onClick={() => setBedrooms((v) => v + 1)}>+</Button>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[11px] text-gray-600">Full Baths</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Button type="button" variant="outline" className="px-2" onClick={() => setFullBaths((v) => Math.max(0, v - 1))}>-</Button>
+                      <div className="w-10 text-center">{fullBaths}</div>
+                      <Button type="button" variant="outline" className="px-2" onClick={() => setFullBaths((v) => v + 1)}>+</Button>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[11px] text-gray-600">Half Baths</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Button type="button" variant="outline" className="px-2" onClick={() => setHalfBaths((v) => Math.max(0, v - 1))}>-</Button>
+                      <div className="w-10 text-center">{halfBaths}</div>
+                      <Button type="button" variant="outline" className="px-2" onClick={() => setHalfBaths((v) => v + 1)}>+</Button>
+                    </div>
+                  </div>
+                </div>
                 <div className="mt-2">
-                  <div className="text-[11px] text-gray-600">Add more rooms</div>
-                  <div className="flex gap-2 mt-1">
+                  <div className="text-[11px] text-gray-600 mb-1">Add more rooms</div>
+                  <div className="flex gap-2">
                     <select
                       value={extraRoom}
                       onChange={(e) => setExtraRoom(e.target.value)}
                       className="w-full px-3 py-2 bg-white text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                     >
-                      <option value="">Select room</option>
+                      <option value="">Select room type</option>
                       {ROOM_TYPES.map((r) => (
                         <option key={r} value={r}>{r}</option>
                       ))}
@@ -209,22 +255,65 @@ export function CreateHomeDialog({
                         }
                       }}
                       className="px-3"
+                      disabled={!extraRoom}
                     >
                       Add
                     </Button>
                   </div>
                   {extraRooms.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2.5">
+                    <div className="mt-3 flex flex-wrap gap-2">
                       {extraRooms.map((r) => (
                         <span
                           key={r}
-                          className="text-sm px-3 py-1.5 bg-blue-50 text-blue-800 rounded-full border border-blue-200 shadow-sm"
+                          className="flex items-center gap-1.5 text-sm px-3 py-1.5 bg-blue-50 text-blue-800 rounded-full border border-blue-200 shadow-sm hover:bg-blue-100 transition-colors"
                         >
                           {r}
+                          <button
+                            type="button"
+                            aria-label="Remove room"
+                            onClick={() => setExtraRooms(extraRooms.filter((x) => x !== r))}
+                            className="hover:bg-blue-200 rounded-full p-0.5 transition-colors"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
                         </span>
                       ))}
                     </div>
                   )}
+                </div>
+                {/* Room Summary */}
+                <div className="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="text-xs font-medium text-gray-700 mb-2">Home Configuration Summary:</div>
+                  <div className="text-xs text-gray-600 space-y-1">
+                    <div className="flex justify-between">
+                      <span>Core rooms:</span>
+                      <span className="font-medium">Kitchen + Living Room</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Bedrooms:</span>
+                      <span className="font-medium">{bedrooms}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Full Bathrooms:</span>
+                      <span className="font-medium">{fullBaths}</span>
+                    </div>
+                    {halfBaths > 0 && (
+                      <div className="flex justify-between">
+                        <span>Half Bathrooms:</span>
+                        <span className="font-medium">{halfBaths}</span>
+                      </div>
+                    )}
+                    {extraRooms.length > 0 && (
+                      <div className="flex justify-between">
+                        <span>Extra rooms:</span>
+                        <span className="font-medium">{extraRooms.length}</span>
+                      </div>
+                    )}
+                    <div className="pt-2 mt-2 border-t border-gray-300 flex justify-between font-semibold text-gray-800">
+                      <span>Total rooms:</span>
+                      <span>{2 + bedrooms + fullBaths + halfBaths + extraRooms.length}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div>

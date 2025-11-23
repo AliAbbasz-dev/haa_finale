@@ -1,6 +1,7 @@
 // Centralized constants for dropdowns and predefined options
 // Home room presets for quick home creation
 export const HOME_PRESETS = [
+  { label: "3 Bedrooms / 2 Bathrooms", bedrooms: 3, bathrooms: 2 },
   { label: "2 Bedrooms / 2 Bathrooms", bedrooms: 2, bathrooms: 2 },
   { label: "3 Bedrooms / 2.5 Bathrooms", bedrooms: 3, bathrooms: 2.5 },
   { label: "4 Bedrooms / 3 Bathrooms", bedrooms: 4, bathrooms: 3 }

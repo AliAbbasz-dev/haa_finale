@@ -15,6 +15,8 @@ import {
   Wrench,
   ChevronDown,
   ChevronRight,
+  Settings,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -24,11 +26,13 @@ import Image from "next/image";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
+  { name: "First HAAven", href: "/haaven-assistant", icon: Sparkles },
   { name: "Homes", href: "/homes", icon: Building },
   { name: "Vehicles", href: "/vehicles", icon: Car },
   { name: "Service Providers", href: "/service-providers", icon: Users },
   { name: "Community", href: "/community", icon: MessageSquare },
   { name: "Notifications", href: "/notifications", icon: Bell },
+  { name: "Settings", href: "/settings", icon: Settings },
 ];
 
 export function Sidebar() {
