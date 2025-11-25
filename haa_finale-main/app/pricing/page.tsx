@@ -72,6 +72,18 @@ export default function PricingPage() {
               >
                 Features
               </Link>
+              <Link
+                href="/#about"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                About Us
+              </Link>
+              <Link
+                href="/#contact"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Contact
+              </Link>
               <a
                 href="https://shop-home-and-auto-assistant.myshopify.com/password"
                 target="_blank"
@@ -712,21 +724,27 @@ export default function PricingPage() {
             Join thousands of homeowners, landlords, and service providers managing their properties
             with HAA.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
             <Link href="/signup">
               <Button className="bg-white text-primary hover:bg-gray-100 px-8 py-3 text-lg font-semibold rounded-full shadow-lg">
                 Start Free Trial
               </Button>
             </Link>
-            <Link href="/#contact">
+            <a href="mailto:sales@homeandautoassistant.com">
               <Button
                 variant="outline"
                 className="border-2 border-white text-white hover:bg-white/10 px-8 py-3 text-lg font-semibold rounded-full"
               >
                 Contact Sales
               </Button>
-            </Link>
+            </a>
           </div>
+          <p className="text-sm opacity-75">
+            Have pricing questions? Email us at{" "}
+            <a href="mailto:sales@homeandautoassistant.com" className="underline font-semibold hover:opacity-90">
+              sales@homeandautoassistant.com
+            </a>
+          </p>
         </div>
       </section>
 

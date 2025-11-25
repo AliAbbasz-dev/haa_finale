@@ -112,15 +112,15 @@ export default function HAAvenAssistantPage() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="flex flex-col h-full bg-gradient-to-br from-primary-50 via-white to-gray-50">
       {/* Header */}
       <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl">
-            <Sparkles className="w-6 h-6 text-white" />
+          <div className="p-2 bg-primary rounded-xl shadow-lg">
+            <Sparkles className="w-6 h-6 text-black" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold text-gray-900">
               First HAAven
             </h1>
             <p className="text-sm text-gray-600">Your AI Home & Auto Assistant</p>
@@ -135,9 +135,9 @@ export default function HAAvenAssistantPage() {
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="p-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl shadow-2xl"
+              className="p-6 bg-primary rounded-3xl shadow-2xl"
             >
-              <Sparkles className="w-16 h-16 text-white" />
+              <Sparkles className="w-16 h-16 text-black" />
             </motion.div>
 
             <div className="text-center space-y-2">
@@ -156,10 +156,10 @@ export default function HAAvenAssistantPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => sendMessage(prompt.text)}
-                  className="p-4 bg-white rounded-xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all group text-left"
+                  className="p-4 bg-white rounded-xl border border-gray-200 hover:border-primary hover:shadow-lg transition-all group text-left"
                 >
-                  <prompt.icon className="w-5 h-5 text-blue-500 mb-2 group-hover:scale-110 transition-transform" />
-                  <p className="text-sm text-gray-700 group-hover:text-blue-600 transition-colors">
+                  <prompt.icon className="w-5 h-5 text-primary mb-2 group-hover:scale-110 transition-transform" />
+                  <p className="text-sm text-gray-700 group-hover:text-primary transition-colors">
                     {prompt.text}
                   </p>
                 </motion.button>
@@ -178,20 +178,20 @@ export default function HAAvenAssistantPage() {
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                     message.role === "user"
-                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
+                      ? "bg-primary text-black"
                       : "bg-white border border-gray-200 text-gray-800"
                   }`}
                 >
                   {message.role === "assistant" && (
                     <div className="flex items-center gap-2 mb-2">
-                      <Sparkles className="w-4 h-4 text-purple-500" />
-                      <span className="text-xs font-medium text-purple-600">First HAAven</span>
+                      <Sparkles className="w-4 h-4 text-primary" />
+                      <span className="text-xs font-medium text-primary">First HAAven</span>
                     </div>
                   )}
                   <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
                   <p
                     className={`text-xs mt-2 ${
-                      message.role === "user" ? "text-blue-100" : "text-gray-400"
+                      message.role === "user" ? "text-black/60" : "text-gray-400"
                     }`}
                   >
                     {new Date(message.timestamp).toLocaleTimeString([], {
@@ -213,7 +213,7 @@ export default function HAAvenAssistantPage() {
           >
             <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3">
               <div className="flex items-center gap-2">
-                <Loader2 className="w-4 h-4 animate-spin text-purple-500" />
+                <Loader2 className="w-4 h-4 animate-spin text-primary" />
                 <span className="text-sm text-gray-600">First HAAven is thinking...</span>
               </div>
             </div>
@@ -234,7 +234,7 @@ export default function HAAvenAssistantPage() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything about your homes, vehicles, or maintenance..."
-                className="resize-none min-h-[60px] max-h-[200px] pr-12 rounded-2xl border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                className="resize-none min-h-[60px] max-h-[200px] pr-12 rounded-2xl border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20"
                 disabled={isLoading}
                 rows={1}
               />
@@ -242,7 +242,7 @@ export default function HAAvenAssistantPage() {
             <Button
               onClick={() => sendMessage()}
               disabled={!input.trim() || isLoading}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-2xl h-[60px] px-6"
+              className="bg-primary hover:bg-primary-600 text-black rounded-2xl h-[60px] px-6 shadow-lg hover:shadow-xl transition-all"
             >
               {isLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

@@ -212,16 +212,30 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="mt-6 flex gap-3">
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Link href="/pricing">
               <Button variant="outline" className="flex items-center gap-2">
                 <Zap className="w-4 h-4" />
                 Upgrade Plan
               </Button>
             </Link>
-            <Link href="/#contact">
+            <a href="mailto:support@homeandautoassistant.com">
               <Button variant="ghost">Contact Support</Button>
-            </Link>
+            </a>
+          </div>
+          <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-sm text-gray-700">
+              <strong className="text-gray-900">Need help with your account?</strong> Our support team is here for you.
+            </p>
+            <p className="text-sm text-gray-600 mt-1">
+              Email:{" "}
+              <a
+                href="mailto:support@homeandautoassistant.com"
+                className="text-primary hover:text-primary-600 underline font-medium"
+              >
+                support@homeandautoassistant.com
+              </a>
+            </p>
           </div>
         </CardContent>
       </Card>

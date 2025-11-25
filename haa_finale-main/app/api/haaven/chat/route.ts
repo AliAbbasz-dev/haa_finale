@@ -85,7 +85,7 @@ Use this data to provide personalized, specific answers. When mentioning specifi
     // Call Groq API
     const completion = await groq.chat.completions.create({
       messages: groqMessages,
-      model: "llama-3.1-70b-versatile", // Fast and free
+      model: "llama-3.3-70b-versatile", // Updated model - Fast and free
       temperature: 0.7,
       max_tokens: 1024,
     });

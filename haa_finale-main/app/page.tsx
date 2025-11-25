@@ -16,6 +16,12 @@ import {
   Smartphone,
   Star,
   ChevronDown,
+  Sparkles,
+  Facebook,
+  Twitter,
+  Instagram,
+  MessageCircle,
+  Send,
 } from "lucide-react";
 import {
   Accordion,
@@ -24,27 +30,25 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// Hero carousel images - Balanced 7 home + 7 auto = 14 total images
+// Hero carousel images - Alternating home and auto images (7 home + 7 auto = 14 total)
 // Images selected for optimal file size (<1MB preferred) and visual quality
 const heroImages = {
   all: [
-    // Home images (7 selected, optimized for file size 788KB-1.8MB)
-    "/carousels/homes-10.png",  // 788K - Modern living room
-    "/carousels/homes-6.png",   // 868K - Kitchen
-    "/carousels/homes-7.png",   // 819K - Bedroom
-    "/carousels/homes-9.png",   // 901K - Bathroom
-    "/carousels/homes-8.png",   // 1.2M - Dining area
-    "/carousels/homes-5.png",   // 1.7M - Exterior
-    "/carousels/homes-1.png",   // 1.8M - Home office
-
-    // Vehicle images (7 selected, optimized for file size 594KB-873KB)
-    "/carousels/vehicles-12.png", // 594K - Compact car
-    "/carousels/vehicles-8.png",  // 678K - Sedan
-    "/carousels/vehicles-6.png",  // 701K - SUV
-    "/carousels/vehicles-2.png",  // 744K - Sports car
-    "/carousels/vehicles-3.png",  // 774K - Pickup truck
-    "/carousels/vehicles-9.png",  // 836K - Luxury car
-    "/carousels/vehicles-11.png", // 873K - Electric vehicle
+    // Alternating pattern: Home, Auto, Home, Auto...
+    "/carousels/homes-10.png",     // 788K - Modern living room
+    "/carousels/vehicles-12.png",  // 594K - Compact car
+    "/carousels/homes-6.png",      // 868K - Kitchen
+    "/carousels/vehicles-8.png",   // 678K - Sedan
+    "/carousels/homes-7.png",      // 819K - Bedroom
+    "/carousels/vehicles-6.png",   // 701K - SUV
+    "/carousels/homes-9.png",      // 901K - Bathroom
+    "/carousels/vehicles-2.png",   // 744K - Sports car
+    "/carousels/homes-8.png",      // 1.2M - Dining area
+    "/carousels/vehicles-3.png",   // 774K - Pickup truck
+    "/carousels/homes-5.png",      // 1.7M - Exterior
+    "/carousels/vehicles-9.png",   // 836K - Luxury car
+    "/carousels/homes-1.png",      // 1.8M - Home office
+    "/carousels/vehicles-11.png",  // 873K - Electric vehicle
   ],
   home: [
     "/carousels/homes-10.png",
@@ -317,11 +321,22 @@ export default function LandingPage() {
               IT'S ALL ABOUT ORGANIZATION
             </p>
 
-            <Link href="/login">
-              <Button className="bg-primary hover:bg-primary-600 text-black px-8 py-3 text-lg rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
-                Join Us for Free
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+              <Link href="/haaven">
+                <Button className="bg-white hover:bg-gray-100 text-primary border-2 border-primary px-8 py-3 text-lg rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5" />
+                  Try First HAAven AI
+                </Button>
+              </Link>
+              <Link href="/login">
+                <Button className="bg-primary hover:bg-primary-600 text-black px-8 py-3 text-lg rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
+                  Join Us for Free
+                </Button>
+              </Link>
+            </div>
+            <p className="text-white/90 text-sm max-w-lg mx-auto">
+              🤖 Try our AI assistant for instant home & auto advice — no signup required!
+            </p>
           </motion.div>
         </div>
 
@@ -347,80 +362,137 @@ export default function LandingPage() {
             </h2>
             <p className="text-lg text-gray-600">We'd love to hear from you</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-            <div>
-              <h3 className="text-xl font-semibold text-slate-800 mb-3">Social</h3>
-              <ul className="space-y-2 text-primary">
-                <li>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
+            {/* Contact Form */}
+            <div className="bg-gray-50 p-8 rounded-2xl shadow-lg">
+              <h3 className="text-2xl font-semibold text-slate-800 mb-6">Send us a message</h3>
+              <form className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="How can we help?"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                    placeholder="Your message..."
+                  />
+                </div>
+                <Button className="w-full bg-primary hover:bg-primary-600 text-black font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                  <Send className="w-5 h-5" />
+                  Send Message
+                </Button>
+              </form>
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-8">
+              {/* Social Media Icons */}
+              <div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-4">Connect with us</h3>
+                <div className="flex gap-4">
                   <a
                     href="https://www.facebook.com/profile.php?id=61583506209910"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline hover:text-primary-600 transition-colors"
+                    className="w-12 h-12 bg-primary rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors shadow-lg"
+                    aria-label="Facebook"
                   >
-                    Facebook
+                    <Facebook className="w-6 h-6 text-black" />
                   </a>
-                </li>
-                <li>
                   <a
                     href="https://twitter.com/homeandautollc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline hover:text-primary-600 transition-colors"
+                    className="w-12 h-12 bg-primary rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors shadow-lg"
+                    aria-label="Twitter"
                   >
-                    Twitter / X
+                    <Twitter className="w-6 h-6 text-black" />
                   </a>
-                </li>
-                <li>
                   <a
                     href="https://www.instagram.com/homeandautoassistant/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline hover:text-primary-600 transition-colors"
+                    className="w-12 h-12 bg-primary rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors shadow-lg"
+                    aria-label="Instagram"
                   >
-                    Instagram
+                    <Instagram className="w-6 h-6 text-black" />
                   </a>
-                </li>
-                <li>
                   <a
-                    href="https://www.tiktok.com/@haa9580?_r=1&_t=ZT-91NqbiOIrhW"
+                    href="https://www.tiktok.com/@haa9580"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline hover:text-primary-600 transition-colors"
+                    className="w-12 h-12 bg-primary rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors shadow-lg"
+                    aria-label="TikTok"
                   >
-                    TikTok
+                    <MessageCircle className="w-6 h-6 text-black" />
                   </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-slate-800 mb-3">Email</h3>
-              <ul className="space-y-2 text-primary">
-                <li>
+                </div>
+              </div>
+
+              {/* Email Addresses */}
+              <div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-4">Email us</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-900">General Inquiries</p>
+                      <a
+                        href="mailto:contact@homeandautoassistant.com"
+                        className="text-primary hover:text-primary-600 transition-colors"
+                      >
+                        contact@homeandautoassistant.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-4">Quick contact</h3>
+                <div className="space-y-3">
                   <a
-                    href="mailto:sales@homeandautoassistant.com"
-                    className="underline hover:text-primary-600 transition-colors"
+                    href="https://wa.me/18135565358"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                   >
-                    sales@homeandautoassistant.com
+                    <MessageCircle className="w-6 h-6 text-primary" />
+                    <span className="text-gray-900 font-medium">WhatsApp</span>
                   </a>
-                </li>
-                <li>
-                  <a
-                    href="mailto:support@homeandautoassistant.com"
-                    className="underline hover:text-primary-600 transition-colors"
-                  >
-                    support@homeandautoassistant.com
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="mailto:contact@homeandautoassistant.com"
-                    className="underline hover:text-primary-600 transition-colors"
-                  >
-                    contact@homeandautoassistant.com
-                  </a>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
           <div className="mt-10 max-w-4xl mx-auto">
@@ -1038,7 +1110,7 @@ export default function LandingPage() {
                   </svg>
                 </a>
                 <a
-                  href="https://www.tiktok.com/@haa9580?_r=1&_t=ZT-91NqbiOIrhW"
+                  href="https://www.tiktok.com/@haa9580"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
@@ -1055,22 +1127,22 @@ export default function LandingPage() {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#about" className="hover:text-white transition-colors">
                     About Us
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#about" className="hover:text-white transition-colors">
                     Our Team
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="mailto:contact@homeandautoassistant.com" className="hover:text-white transition-colors">
                     Careers
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#contact" className="hover:text-white transition-colors">
                     Contact
                   </a>
                 </li>
@@ -1117,17 +1189,17 @@ export default function LandingPage() {
               <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="mailto:support@homeandautoassistant.com" className="hover:text-white transition-colors">
                     Help Center
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Terms of Service
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white">
+                  <a href="#" className="hover:text-white transition-colors">
                     Privacy Policy
                   </a>
                 </li>
