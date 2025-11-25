@@ -75,23 +75,30 @@ const activeHeroImages = heroImages[heroCategory];
 
 const features = [
   {
+    icon: Sparkles,
+    title: "First HAAven AI Assistant",
+    description:
+      "Get instant answers to home & auto questions. Try it free without login!",
+    bgColor: "bg-primary",
+  },
+  {
     icon: Home,
     title: "Home & Vehicle Profiles",
     description:
       "Keep specs, paint colours, tyre sizes and more in one tidy card.",
-    bgColor: "bg-primary",
+    bgColor: "bg-primary-600",
   },
   {
     icon: Bell,
     title: "Smart Reminders",
     description: "Automated alerts based on dates or mileage.",
-    bgColor: "bg-primary-600",
+    bgColor: "bg-primary-400",
   },
   {
     icon: Shield,
     title: "Receipts Vault",
     description: "Upload receipts & auto-extract warranty details.",
-    bgColor: "bg-primary-400",
+    bgColor: "bg-primary-300",
   },
   {
     icon: Users,
@@ -103,7 +110,7 @@ const features = [
     icon: Users,
     title: "Community",
     description: "Share projects, ask questions, get inspired.",
-    bgColor: "bg-primary-300",
+    bgColor: "bg-gray-600",
   },
   {
     icon: Smartphone,

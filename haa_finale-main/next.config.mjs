@@ -7,8 +7,19 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    unoptimized: false, // Enable image optimization
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
+  // Performance optimizations
+  swcMinify: true, // Enable SWC minification for faster builds
+  reactStrictMode: true,
+  poweredByHeader: false, // Remove X-Powered-By header
+  compress: true, // Enable gzip compression
 }
 
 export default nextConfig
