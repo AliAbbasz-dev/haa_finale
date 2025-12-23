@@ -18,6 +18,7 @@ import {
 import { PageTransition } from "@/components/layout/page-transition";
 import AuthGuard from "@/components/auth-guard";
 import { CreateRoomDialog } from "@/components/dialogs/create-room-dialog";
+import { EditRoomDialog } from "@/components/dialogs/edit-room-dialog";
 import { CreateOutsideItemDialog } from "@/components/dialogs/create-outside-item-dialog";
 import { CreatePurchaseDialog } from "@/components/dialogs/create-purchase-dialog";
 import { CreateHomeMaintenanceDialog } from "@/components/dialogs/create-home-maintenance-dialog";
@@ -38,6 +39,7 @@ function HomeDetailContent() {
   const homeId = params.id as string;
 
   const [activeDialog, setActiveDialog] = useState<string | null>(null);
+  const [selectedRoom, setSelectedRoom] = useState<any | null>(null);
 
   const {
     data: home,
@@ -224,6 +226,7 @@ function HomeDetailContent() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: index * 0.1 }}
+                            onClick={() => setSelectedRoom(room)}
                             className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
                           >
                             {room.image_url ? (
@@ -723,6 +726,14 @@ function HomeDetailContent() {
         onOpenChange={(open) => !open && setActiveDialog(null)}
         homeId={homeId}
       />
+      {selectedRoom && (
+        <EditRoomDialog
+          open={!!selectedRoom}
+          onOpenChange={(open) => !open && setSelectedRoom(null)}
+          room={selectedRoom}
+          homeId={homeId}
+        />
+      )}
     </PageTransition>
   );
 }

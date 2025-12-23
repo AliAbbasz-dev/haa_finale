@@ -411,6 +411,7 @@ export type Database = {
           name: string | null;
           paint_color: string | null;
           flooring: string | null;
+          lighting: string | null;
           installer: string | null;
           purchase_from: string | null;
           warranty_json: any | null;
@@ -424,6 +425,7 @@ export type Database = {
           name?: string | null;
           paint_color?: string | null;
           flooring?: string | null;
+          lighting?: string | null;
           installer?: string | null;
           purchase_from?: string | null;
           warranty_json?: any | null;
@@ -437,10 +439,46 @@ export type Database = {
           name?: string | null;
           paint_color?: string | null;
           flooring?: string | null;
+          lighting?: string | null;
           installer?: string | null;
           purchase_from?: string | null;
           warranty_json?: any | null;
           image_url?: string | null;
+          created_at?: string;
+        };
+      };
+      room_files: {
+        Row: {
+          id: string;
+          room_id: string;
+          user_id: string;
+          file_name: string;
+          file_url: string;
+          file_type: string | null;
+          file_size: number | null;
+          uploaded_at: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          room_id: string;
+          user_id: string;
+          file_name: string;
+          file_url: string;
+          file_type?: string | null;
+          file_size?: number | null;
+          uploaded_at?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          room_id?: string;
+          user_id?: string;
+          file_name?: string;
+          file_url?: string;
+          file_type?: string | null;
+          file_size?: number | null;
+          uploaded_at?: string;
           created_at?: string;
         };
       };

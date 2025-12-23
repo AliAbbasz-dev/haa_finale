@@ -46,3 +46,55 @@ export async function deleteFile(url: string): Promise<boolean> {
     return false;
   }
 }
+
+export async function uploadPublicFile(
+  file: File,
+  folder = "room-files"
+): Promise<{ url: string; fileName: string } | null> {
+  const supabase = createClient();
+
+  try {
+    const fileExt = file.name.split(".").pop();
+    const timestamp = Date.now();
+    const randomStr = Math.random().toString(36).substring(7);
+    const fileName = `${timestamp}-${randomStr}.${fileExt}`;
+    const filePath = `${folder}/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("uploads")
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error("Upload error:", uploadError);
+      return null;
+    }
+
+    const { data } = supabase.storage.from("uploads").getPublicUrl(filePath);
+
+    return {
+      url: data.publicUrl,
+      fileName: file.name,
+    };
+  } catch (error) {
+    console.error("Storage error:", error);
+    return null;
+  }
+}
+
+export async function deleteRoomFile(url: string): Promise<boolean> {
+  const supabase = createClient();
+
+  try {
+    const urlParts = url.split("/uploads/");
+    if (urlParts.length < 2) return false;
+
+    const filePath = urlParts[1];
+
+    const { error } = await supabase.storage.from("uploads").remove([filePath]);
+
+    return !error;
+  } catch (error) {
+    console.error("Delete error:", error);
+    return false;
+  }
+}

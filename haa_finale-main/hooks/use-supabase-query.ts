@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase";
 import { useSupabase } from "@/components/providers/supabase-provider";
 import { toast } from "sonner";
 import type { Database } from "@/lib/supabase";
+import { deleteRoomFile } from "@/lib/storage";
 
 // Generic hooks
 export function useSupabaseQuery<T>(
@@ -281,6 +282,94 @@ export function useUpdateRoom() {
     onError: (error) => {
       console.error("Error updating room:", error);
       toast.error("Failed to update room");
+    },
+  });
+}
+
+export function useRoomFiles(roomId: string) {
+  const supabase = createClient();
+
+  return useQuery({
+    queryKey: ["room-files", roomId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("room_files")
+        .select("*")
+        .eq("room_id", roomId)
+        .order("uploaded_at", { ascending: false });
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!roomId,
+  });
+}
+
+export function useUploadRoomFile() {
+  const queryClient = useQueryClient();
+  const supabase = createClient();
+  const { user } = useSupabase();
+
+  return useMutation({
+    mutationFn: async (file: {
+      room_id: string;
+      file_name: string;
+      file_url: string;
+      file_type?: string;
+      file_size?: number;
+    }) => {
+      const { data, error } = await supabase
+        .from("room_files")
+        .insert({
+          ...file,
+          user_id: user?.id,
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["room-files", data.room_id] });
+      toast.success("File uploaded successfully");
+    },
+    onError: (error) => {
+      console.error("Error uploading file:", error);
+      toast.error("Failed to upload file");
+    },
+  });
+}
+
+export function useDeleteRoomFile() {
+  const queryClient = useQueryClient();
+  const supabase = createClient();
+
+  return useMutation({
+    mutationFn: async ({
+      id,
+      roomId,
+      fileUrl,
+    }: {
+      id: string;
+      roomId: string;
+      fileUrl: string;
+    }) => {
+      const { error } = await supabase.from("room_files").delete().eq("id", id);
+
+      if (error) throw error;
+
+      await deleteRoomFile(fileUrl);
+
+      return { id, roomId };
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["room-files", data.roomId] });
+      toast.success("File deleted successfully");
+    },
+    onError: (error) => {
+      console.error("Error deleting file:", error);
+      toast.error("Failed to delete file");
     },
   });
 }

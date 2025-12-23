@@ -25,6 +25,7 @@ const roomSchema = z.object({
   name: z.string().min(1, "Room name is required"),
   paint_color: z.string().optional(),
   flooring: z.string().optional(),
+  lighting: z.string().optional(),
   installer: z.string().optional(),
   purchase_from: z.string().optional(),
   warranty_provider: z.string().optional(),
@@ -108,6 +109,7 @@ export function CreateRoomDialog({
         name: data.name,
         paint_color: data.paint_color || null,
         flooring: data.flooring || null,
+        lighting: data.lighting || null,
         installer: features.installer ? data.installer || null : null,
         purchase_from: features.purchase ? data.purchase_from || null : null,
         warranty_json,
@@ -262,6 +264,23 @@ export function CreateRoomDialog({
 
               <div className="space-y-2">
                 <Label
+                  htmlFor="lighting"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Lighting
+                </Label>
+                <Input
+                  id="lighting"
+                  {...register("lighting")}
+                  placeholder="LED Recessed Lights"
+                  className="w-full px-3 py-2 bg-white text-gray-900 placeholder:text-gray-400 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label
                   htmlFor="installer"
                   className="text-sm font-medium text-gray-700"
                 >
@@ -271,6 +290,21 @@ export function CreateRoomDialog({
                   id="installer"
                   {...register("installer")}
                   placeholder="ABC Flooring Co."
+                  className="w-full px-3 py-2 bg-white text-gray-900 placeholder:text-gray-400 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label
+                  htmlFor="purchase_from"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Purchased From
+                </Label>
+                <Input
+                  id="purchase_from"
+                  {...register("purchase_from")}
+                  placeholder="Home Depot"
                   className="w-full px-3 py-2 bg-white text-gray-900 placeholder:text-gray-400 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
